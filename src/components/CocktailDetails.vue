@@ -27,20 +27,16 @@
 </template>
 
 <script setup lang="ts">
+import type { Cocktail } from '@/api/types/Cocktail'
 import { computed } from 'vue'
 
-const props = defineProps({
-    cocktail: {
-        type: Object,
-        required: true
-    }
-})
+const props = defineProps<{ cocktail: Cocktail }>()
 
 const ingredients = computed(() => {
     const result = []
     for (let i = 1; i <= 15; i++) {
-        const measure = props.cocktail[`strMeasure${i}`]
-        const name = props.cocktail[`strIngredient${i}`]
+        const measure = props.cocktail[`strMeasure${i}` as keyof Cocktail]
+        const name = props.cocktail[`strIngredient${i}` as keyof Cocktail]
         if (measure || name) {
             result.push({
                 measure: measure?.trim() || '',

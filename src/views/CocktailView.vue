@@ -12,17 +12,18 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useCocktails } from '@/composables/useCocktails'
+import { useCocktails } from '@/composables/useCocktails.ts'
 import CocktailDetails from '@/components/CocktailDetails.vue'
+import type { CODES } from '@/api/cocktails/cocktailCodes'
 
 const route = useRoute()
 const { cocktails, cocktailsLoading, error, fetchCocktails } = useCocktails()
 
 const cocktailsByCode = computed(() => {
-  return cocktails[route.params.cocktailCode] || []
+  return cocktails[route.params.cocktailCode as CODES] || []
 })
 
 const formattedCocktailName = computed(() => {
@@ -33,7 +34,7 @@ const formattedCocktailName = computed(() => {
 watch(
   () => route.params.cocktailCode,
   (newCode) => {
-    if (newCode) fetchCocktails(newCode)
+    if (newCode) fetchCocktails(newCode as CODES)
   },
   { immediate: true }
 )

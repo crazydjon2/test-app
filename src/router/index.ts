@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import type { CODES } from '@/api/cocktails/cocktailCodes'
+import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router'
 
 const cocktailCodes = ['margarita', 'mojito', 'a1', 'kir']
 
@@ -8,11 +9,11 @@ const routes = [
     redirect: `/${cocktailCodes[0]}`
   },
   {
-    path: '/:cocktailCode',
+    path: '/:cocktailCode(\\d+)',
     name: 'cocktail',
     component: () => import('../views/CocktailView.vue'),
-    beforeEnter: (to) => {
-      if (!cocktailCodes.includes(to.params.cocktailCode)) {
+    beforeEnter: (to: RouteLocationNormalized) => {
+      if (!cocktailCodes.includes(to.params.cocktailCode as CODES)) {
         return { name: '404' }
       }
     }

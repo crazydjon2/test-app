@@ -7,12 +7,13 @@
     </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { CODES } from '@/api/cocktails/cocktailCodes'
 import { ref } from 'vue'
 
-const cocktailCodes = ref(['margarita', 'mojito', 'a1', 'kir'])
+const cocktailCodes = ref<CODES[]>([CODES.margarita, CODES.mojito, CODES.a1, CODES.kir])
 
-const formatCocktailName = (code) => {
+const formatCocktailName = (code: CODES) => {
     return code.charAt(0).toUpperCase() + code.slice(1)
 }
 </script>
