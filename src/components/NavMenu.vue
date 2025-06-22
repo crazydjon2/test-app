@@ -1,11 +1,7 @@
 <template>
   <nav class="nav-menu">
-    <router-link
-      v-for="code in cocktailCodes"
-      :key="code"
-      :to="`/${code}`"
-      :class="{ active: $route.params.cocktailCode === code }"
-    >
+    <router-link v-for="code in cocktailCodes" :key="code" :to="`/${code}`"
+      :class="{ active: $route.params.cocktailCode === code }">
       {{ formatCocktailName(code) }}
     </router-link>
   </nav>
@@ -13,9 +9,7 @@
 
 <script setup lang="ts">
 import { CODES } from '@/api/types/cocktailCodes'
-import { ref } from 'vue'
-
-const cocktailCodes = ref<CODES[]>([CODES.margarita, CODES.mojito, CODES.a1, CODES.kir])
+import { cocktailCodes } from '@/router/cocktailCodes'
 
 const formatCocktailName = (code: CODES) => {
   return code.charAt(0).toUpperCase() + code.slice(1)
