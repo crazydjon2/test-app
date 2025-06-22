@@ -7,11 +7,7 @@
     <div v-else-if="!cocktailsByCode.length" class="no-results">No cocktails found</div>
 
     <div v-else class="cocktail-list">
-      <CocktailDetails
-        v-for="cocktail in cocktailsByCode"
-        :key="cocktail.idDrink"
-        :cocktail="cocktail"
-      />
+      <CocktailDetails v-for="cocktail in cocktailsByCode" :key="cocktail.idDrink" :cocktail="cocktail" />
     </div>
   </div>
 </template>
@@ -31,7 +27,8 @@ const cocktailsByCode = computed(() => {
 })
 
 const formattedCocktailName = computed(() => {
-  return route.params.cocktailCode.charAt(0).toUpperCase() + route.params.cocktailCode.slice(1)
+  const cocktailCode = route.params.cocktailCode as string;
+  return cocktailCode.charAt(0).toUpperCase() + cocktailCode.slice(1)
 })
 
 watch(
