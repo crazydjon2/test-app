@@ -20,22 +20,18 @@
 import NavMenu from './components/NavMenu.vue'
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .app-container {
   max-width: 1024px;
   min-width: 360px;
   display: flex;
   margin: 0 auto;
   padding: 1rem;
-}
 
-@media screen and (max-width: 768px) {
-  .app-container {
-    flex-direction: column;
+  @media screen and (max-width: 768px) {
+    & {
+      flex-direction: column;
+    }
   }
 }
-
-/* .main-content {
-  padding-left: 2rem;
-} */
 </style>

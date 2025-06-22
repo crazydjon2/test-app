@@ -7,7 +7,11 @@
     <div v-else-if="!cocktailsByCode.length" class="no-results">No cocktails found</div>
 
     <div v-else class="cocktail-list">
-      <CocktailDetails v-for="cocktail in cocktailsByCode" :key="cocktail.idDrink" :cocktail="cocktail" />
+      <CocktailDetails
+        v-for="cocktail in cocktailsByCode"
+        :key="cocktail.idDrink"
+        :cocktail="cocktail"
+      />
     </div>
   </div>
 </template>
@@ -17,7 +21,7 @@ import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCocktails } from '@/composables/useCocktails.ts'
 import CocktailDetails from '@/components/CocktailDetails.vue'
-import type { CODES } from '@/api/cocktails/cocktailCodes'
+import { CODES } from '@/api/types/cocktailCodes'
 
 const route = useRoute()
 const { cocktails, cocktailsLoading, error, fetchCocktails } = useCocktails()
@@ -27,8 +31,7 @@ const cocktailsByCode = computed(() => {
 })
 
 const formattedCocktailName = computed(() => {
-  return route.params.cocktailCode.charAt(0).toUpperCase() +
-    route.params.cocktailCode.slice(1)
+  return route.params.cocktailCode.charAt(0).toUpperCase() + route.params.cocktailCode.slice(1)
 })
 
 watch(
@@ -36,11 +39,11 @@ watch(
   (newCode) => {
     if (newCode) fetchCocktails(newCode as CODES)
   },
-  { immediate: true }
+  { immediate: true },
 )
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .cocktail-view {
   padding: 1rem;
 }
@@ -60,6 +63,6 @@ watch(
 }
 
 .error {
-  color: #ff4757;
+  color: $error-color;
 }
 </style>

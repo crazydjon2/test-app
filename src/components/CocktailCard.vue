@@ -1,27 +1,22 @@
 <template>
   <div class="cocktail-card">
     <router-link :to="`/${cocktailCode}/${cocktail.idDrink}`">
-      <img :src="cocktail.strDrinkThumb" :alt="cocktail.strDrink" loading="lazy" class="cocktail-image">
+      <img
+        :src="cocktail.strDrinkThumb"
+        :alt="cocktail.strDrink"
+        loading="lazy"
+        class="cocktail-image"
+      />
       <h3>{{ cocktail.strDrink }}</h3>
     </router-link>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { CODES } from '@/api/cocktails/cocktailCodes';
-import type { Cocktail } from '@/api/types/Cocktail';
+import type { CODES } from '@/api/types/cocktailCodes'
+import type { Cocktail } from '@/api/types/Cocktail'
 
-defineProps<{ cocktail: Cocktail, cocktailCode: CODES }>()
-// defineProps({
-//   cocktail: {
-//     type: Object,
-//     required: true
-//   },
-//   cocktailCode: {
-//     type: String,
-//     required: true
-//   }
-// })
+defineProps<{ cocktail: Cocktail; cocktailCode: CODES }>()
 </script>
 
 <style scoped>

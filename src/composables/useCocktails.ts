@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { useCocktailsStore } from '@/stores/cocktails'
-import type { CODES } from '@/api/cocktails/cocktailCodes'
+import type { CODES } from '@/api/types/cocktailCodes'
 
 export function useCocktails() {
   const store = useCocktailsStore()
@@ -18,7 +18,7 @@ export function useCocktails() {
       } else if (typeof err === 'string') {
         error.value = err
       } else {
-        console.error('An unknown error occurred.');
+        console.error('An unknown error occurred.')
       }
     } finally {
       cocktailsLoading.value = false
@@ -29,6 +29,6 @@ export function useCocktails() {
     cocktails: store.cocktails,
     cocktailsLoading,
     error,
-    fetchCocktails
+    fetchCocktails,
   }
 }

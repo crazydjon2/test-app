@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .error-page {
   text-align: center;
   padding: 2rem;
@@ -19,7 +19,7 @@
 
 .error-page h1 {
   font-size: 5rem;
-  color: #ff4757;
+  color: $error-color;
   margin-bottom: 1rem;
 }
 
@@ -30,14 +30,13 @@
 
 .error-page a {
   padding: 0.75rem 1.5rem;
-  background-color: #42b983;
-  color: white;
+  background-color: $bg-color-1;
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.3s;
 }
 
 .error-page a:hover {
-  background-color: #3aa876;
+  background-color: $bg-color-2;
 }
 </style>

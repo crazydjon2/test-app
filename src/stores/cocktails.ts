@@ -1,4 +1,4 @@
-import type { CODES } from '@/api/cocktails/cocktailCodes'
+import type { CODES } from '@/api/types/cocktailCodes'
 import { getCocktailtsByCode } from '@/api/cocktails/getCocktailByCode'
 import type { Cocktail } from '@/api/types/Cocktail'
 import { defineStore } from 'pinia'
@@ -7,7 +7,7 @@ export const useCocktailsStore = defineStore('cocktails', {
   state: () => ({
     cocktails: {} as Record<CODES, Cocktail[]>,
     loading: false,
-    error: null
+    error: null,
   }),
   actions: {
     async fetchCocktails(cocktailCode: CODES) {
@@ -16,25 +16,16 @@ export const useCocktailsStore = defineStore('cocktails', {
       this.loading = true
       this.error = null
 
-      return getCocktailtsByCode(cocktailCode).then((res) => {
-        this.cocktails[cocktailCode] = res.data.drinks || []
-      }).catch((e) => {
-        this.error = e
-      }).finally((() => {
-        this.loading = false
-      }))
-
-      // try {
-      //   const response = await fetch(
-      //     `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${cocktailCode}`
-      //   )
-      //   const data = await response.json()
-      //   this.cocktails[cocktailCode] = data.drinks || []
-      // } catch (err) {
-      //   this.error = err.message
-      // } finally {
-      //   this.loading = false
-      // }
-    }
-  }
+      return getCocktailtsByCode(cocktailCode)
+        .then((res) => {
+          this.cocktails[cocktailCode] = res.data.drinks || []
+        })
+        .catch((e) => {
+          this.error = e
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
+  },
 })
