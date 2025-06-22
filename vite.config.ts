@@ -21,5 +21,6 @@ export default defineConfig({
         additionalData: `@use "@/assets/styles/_variables.scss" as *;`
       }
     }
-  }
+  },
+  base: process.env.NODE_ENV === 'production' ? '/' : './'
 })
